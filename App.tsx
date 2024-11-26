@@ -1,31 +1,31 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Text, View, StyleSheet } from "react-native";
+// In App.js in a new project
 
-const App = () => {
-  return(
-    <View style={style.container}>
-      <Text style={style.red}>Just Red</Text>
-      <Text style={style.bigBlue}>Just BigBlue</Text>
-      <Text style={[style.bigBlue, style.red]}>BigBlue, then red</Text>
-      <Text style={[style.red, style.bigBlue]}>BigBlue, then red</Text>
-      <Text>red, then BigBlue</Text>
-    </View>
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import DetailsScreen  from '../rn_assets/Details';
+import HomeScreen from './Home';
+import LoginScreen from './LoginScreen';
+import Dashboard from './Dashboard/Dashboard';
+
+const Stack = createNativeStackNavigator();
+
+function RootStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Dashboard" component={Dashboard} options={{headerShown: false}}/>
+    </Stack.Navigator>
   );
-};
+}
 
-
-const style = StyleSheet.create({
-  container: {
-    marginTop: 50,
-  },
-  bigBlue:{
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  red: {
-    color: 'red',
-  },
-});
-
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
+  );
+}
